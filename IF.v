@@ -29,7 +29,7 @@ integer i;
 initial begin
     for (i=0;i<`Cache_size;i=i+1)
     begin
-        cache_address[i][`Instruction_Address_size-1]=1;
+        cache_address[i][31]=1;
         cache_instruction[i]=0;
     end
 end
