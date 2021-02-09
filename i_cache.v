@@ -54,8 +54,8 @@ always @ (*)
 begin
     if (rst==1||instruction_read_flag==0)
     begin
-        _instruction_flag<=0;
-        _instruction<=0;
+        _instruction_flag=0;
+        _instruction=0;
     end
 //    else if (cache_address[instruction_read_address[9:2]]==instruction_read_address)
 //    begin
@@ -64,9 +64,9 @@ begin
 //    end
     else if (instruction_flag==1)
     begin
-        _instruction_flag<=1;
-        _instruction<=instruction;
-$display("Icache out %d  %d",instruction_read_address,_instruction); 
+        _instruction_flag=1;
+        _instruction=instruction;
+//$display("Icache out %d  %d",instruction_read_address,_instruction); 
 //        cache_address[instruction_read_address[9:2]]<=instruction_read_address;
 //        cache_instruction[instruction_read_address[9:2]]<=instruction;
     end
