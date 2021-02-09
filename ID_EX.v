@@ -35,7 +35,7 @@ module ID_EX
 );
 always @ (posedge clk)
 begin
-    if (rst==1||discard==1)
+    if (rst==1||discard==1||(stall_state[2]==1&&stall_state[3]==0))
     begin
         _pc<=0;
         _alusel<=0;
@@ -49,7 +49,7 @@ begin
         _br_offset<=0;
         _prediction<=0;
     end
-    else if (stall_state[2]==0)
+    else if (stall_state[3]==0)
     begin
         _pc<=pc;
         _alusel<=alusel;
