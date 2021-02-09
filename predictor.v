@@ -25,6 +25,7 @@ initial begin
     begin
         address[i][31]=1;
         instruction[i]=0;
+        jump[i]=0;
     end
 end
 always @ (posedge clk)
@@ -33,7 +34,7 @@ begin
     begin
         for (i=0;i<`Predictor_size;i=i+1)
         begin
-            address[i]<=0;
+            address[i][31]<=1;
             instruction[i]<=0;
             jump[i]<=0;
         end

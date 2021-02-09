@@ -42,12 +42,17 @@ begin
         stall_flag=0;
         _instruction_read_flag=0;
         _instruction_read_address=0;
+        for (i=0;i<`Cache_size;i=i+1)
+        begin
+            cache_address[i][31]=1;
+            cache_instruction[i]=0;
+        end
     end
     else if (cache_address[pc[9:2]]==pc)
     begin
         _pc=pc;
         _instruction=cache_instruction[pc[9:2]];
-$display("IF %x %x",pc,cache_instruction[pc[9:2]]);
+//$display("IF %x %x",pc,cache_instruction[pc[9:2]]);
         stall_flag=0;
         _instruction_read_flag=0;
         _instruction_read_address=0;
