@@ -44,6 +44,10 @@ reg[31:0] tmp_data;
 reg[`Data_Address_size] tmp_address;
 always @ (posedge clk)
 begin
+    if (rst!=1)
+    begin
+        $display("Mem_ctrl %d %d %d %d %d %d",running_state,state,num,tmp_num,instruction_read_flag,tmp_address);
+    end
     if (rst==1)
     begin
         instruction_flag<=0;
@@ -68,7 +72,7 @@ begin
             state<=2'b01;
             num<=sl_data_length;
             tmp_address<=sl_reg_address;
-            tmp_num<=num;
+            tmp_num<=1;
         end
         else if (load==1)
         begin
@@ -76,7 +80,7 @@ begin
             state<=2'b10;
             num<=sl_data_length;
             tmp_address<=sl_reg_address;
-            tmp_num<=num;
+            tmp_num<=1;
         end
         else if (instruction_read_flag==1)
         begin
@@ -84,7 +88,7 @@ begin
             state<=2'b11;
             num<=4;
             tmp_address<=instruction_read_address;
-            tmp_num<=num;
+            tmp_num<=1;
         end
     end
     else if (state==2'b01)
@@ -234,12 +238,6 @@ begin
             mem_a=tmp_address+3;
             mem_wr=1;
         end
-        else
-        begin
-            mem_dout=0;
-            mem_a=0;
-            mem_wr=0;
-        end
     end
     else
     begin
@@ -262,11 +260,6 @@ begin
         else if (tmp_num==4)
         begin
             mem_a=tmp_address+3;
-            mem_wr=0;
-        end
-        else
-        begin
-            mem_a=0;
             mem_wr=0;
         end
     end

@@ -43,10 +43,7 @@ begin
     else if (instruction_flag==1)
     begin
         _instruction=instruction;
-    end
-    else
-    begin
-        _instruction=0;
+//$display("IF  %d  %d",_pc,_instruction);  
     end
 end
 endmodule

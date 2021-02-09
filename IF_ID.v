@@ -20,17 +20,18 @@ module IF_ID
 );
 always @ (posedge clk)
 begin
-    if (rst==1||discard==1||stall_state[1]==1)
+    if (rst==1||discard==1)
     begin
         _pc<=0;
         _instruction<=0;
         _prediction<=0;
     end
-    else
+    else if (stall_state[1]==0)
     begin
         _pc<=pc;
         _instruction<=instruction;
         _prediction<=prediction;
+//$display("IF_ID    %d %d %d %d",pc,_pc,instruction,prediction); 
     end
 end
 endmodule

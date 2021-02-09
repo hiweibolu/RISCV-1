@@ -336,6 +336,7 @@ begin
             end
         endcase 
     end 
+//$display("ID    %d %d %d %d",_pc,instruction,alusel,aluop); 
 end
 
 always @ (*)

@@ -38,13 +38,14 @@ begin
         _instruction_read_flag<=0;
         _instruction_read_address<=0;
     end
-    else if (cache_address[instruction_read_address[9:2]]==instruction_read_address)
-    begin
-        _instruction_read_flag<=0;
-        _instruction_read_address<=0;
-    end
+//    else if (cache_address[instruction_read_address[9:2]]==instruction_read_address)
+//    begin
+//        _instruction_read_flag<=0;
+//        _instruction_read_address<=0;
+//    end
     else
     begin
+$display("Icache in %d",_instruction_read_address); 
         _instruction_read_flag<=1;
         _instruction_read_address<=instruction_read_address;
     end
@@ -56,23 +57,18 @@ begin
         _instruction_flag<=0;
         _instruction<=0;
     end
-    else if (cache_address[instruction_read_address[9:2]]==instruction_read_address)
-    begin
-        _instruction_flag<=1;
-        _instruction<=cache_instruction[instruction_read_address[9:2]];
-    end
+//    else if (cache_address[instruction_read_address[9:2]]==instruction_read_address)
+//    begin
+//        _instruction_flag<=1;
+//        _instruction<=cache_instruction[instruction_read_address[9:2]];
+//    end
     else if (instruction_flag==1)
     begin
         _instruction_flag<=1;
         _instruction<=instruction;
-        cache_address[instruction_read_address[9:2]]<=instruction_read_address;
-        cache_instruction[instruction_read_address[9:2]]<=instruction;
-$display("clock    %d %d",instruction_read_address,instruction);  
-    end
-    else
-    begin
-        _instruction_flag<=0;
-        _instruction<=0;
+$display("Icache out %d  %d",instruction_read_address,_instruction); 
+//        cache_address[instruction_read_address[9:2]]<=instruction_read_address;
+//        cache_instruction[instruction_read_address[9:2]]<=instruction;
     end
 end
 endmodule
