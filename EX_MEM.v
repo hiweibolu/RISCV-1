@@ -29,7 +29,7 @@ module EX_MEM
 );
 always @ (posedge clk)
 begin
-    if (rst==1||stall_state[3]==1)
+    if (rst==1)
     begin
         _modify_flag<=0;
         _modify_address<=0;
@@ -41,7 +41,7 @@ begin
         _sl_data_length<=0;
         _sl_data_signed<=0;
     end
-    else
+    else if (stall_state[3]==0)
     begin
         _modify_flag<=modify_flag;
         _modify_address<=modify_address;

@@ -20,17 +20,18 @@ module MEM_WB
 
 always @ (posedge clk)
 begin
-    if (rst||stall_state[4]==1)
+    if (rst)
     begin
         _modify_flag<=0;
         _modify_address<=0;
         _modify_data<=0;
     end
-    else
+    else if (stall_state[4]==0)
     begin
         _modify_flag<=modify_flag;
         _modify_address<=modify_address;
         _modify_data<=modify_data;
+$display("WB %d %x %x",modify_flag,modify_address,modify_data);
     end
 end
 endmodule
