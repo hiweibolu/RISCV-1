@@ -5,7 +5,7 @@ module predictor
     input wire rst,
 
     input wire[`Instruction_Address_size] pc,
-    //wire from IF/ID
+    //wire from IF
     output reg[`Instruction_Address_size] _pc,
     //wire to pc_reg
     output reg prediction,

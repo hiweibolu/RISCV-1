@@ -423,7 +423,7 @@ predictor _predictor
   .clk(clk_in),
   .rst(Rst),
 
-  .pc(IF_ID_pc),
+  .pc(IF_pc),
 
   ._pc(predictor_pc),
 
