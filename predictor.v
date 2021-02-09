@@ -12,6 +12,7 @@ module predictor
     //wire to IF/ID
     input wire br_update, // if instruction is branch
     input wire br, // if branch
+    input wire br_JALR, // if instruction is JALR
     input wire[`Instruction_Address_size] br_address, // address if branch
     input wire[`Instruction_Address_size] br_pc // pc of the branch instruction
     //wire from EX
@@ -39,7 +40,7 @@ begin
             jump[i]<=0;
         end
     end 
-    else if (br_update==1)
+    else if (br_update==1&&br_JALR==0)
     begin
         address[br_pc[9:2]]<=br_pc;
         instruction[br_pc[9:2]]<=br_address;

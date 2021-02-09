@@ -14,6 +14,7 @@ module ID_EX
     input wire[`Data_Address_size] sl_offset, //for save & load
     input wire[`Instruction_Address_size] br_address, //for branch
     input wire[`Instruction_Address_size] br_offset, //for branch
+    input wire br_JALR, //if instruction is JALR
     input wire prediction,
     //wire from ID
     input wire[`Stall_size] stall_state,
@@ -30,6 +31,7 @@ module ID_EX
     output reg[`Data_Address_size] _sl_offset, //for save & load
     output reg[`Instruction_Address_size] _br_address, //for branch
     output reg[`Instruction_Address_size] _br_offset, //for branch
+    output reg _br_JALR, //if instruction is JALR
     output reg _prediction
     //wire to ID_EX
 );
@@ -47,6 +49,7 @@ begin
         _sl_offset<=0;
         _br_address<=0;
         _br_offset<=0;
+        _br_JALR<=0;
         _prediction<=0;
     end
     else if (stall_state[3]==0)
@@ -61,6 +64,7 @@ begin
         _sl_offset<=sl_offset;
         _br_address<=br_address;
         _br_offset<=br_offset;
+        _br_JALR<=br_JALR;
         _prediction<=prediction;
     end
 end

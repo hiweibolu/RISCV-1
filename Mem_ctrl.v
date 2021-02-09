@@ -68,7 +68,7 @@ begin
         instruction<=0;
         mem_ctrl_done<=0;
         mem_ctrl_data<=0;
-        if (save==1)
+        if (save==1&&mem_ctrl_done==0)
         begin
             running_state<=1;
             state<=2'b01;
@@ -76,7 +76,7 @@ begin
             tmp_address<=sl_reg_address;
             tmp_num<=1;
         end
-        else if (load==1)
+        else if (load==1&&mem_ctrl_done==0)
         begin
             running_state<=1;
             state<=2'b10;
