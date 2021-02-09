@@ -26,7 +26,7 @@ begin
         _instruction<=0;
         _prediction<=0;
     end
-    else if (stall_state[1]==0)
+    else if (stall_state[2]==0)
     begin
         _pc<=pc;
         _instruction<=instruction;
