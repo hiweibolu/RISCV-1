@@ -11,6 +11,7 @@ module i_cache
     output reg[`Instruction_size] _instruction,
     //wire to IF
 
+    input wire running,
     input wire instruction_flag,
     input wire[`Instruction_size] instruction,
     //wire from Mem_ctrl
@@ -21,33 +22,33 @@ module i_cache
 reg[`Instruction_Address_size] cache_address[`Cache_size-1:0];
 reg[`Instruction_size] cache_instruction[`Cache_size-1:0];
 integer i;
-always @ (posedge clk)
+always @ (*)
 begin
     if (rst==1)
     begin
-        _instruction_read_flag<=0;
-        _instruction_read_address<=0;
+        _instruction_read_flag=0;
+        _instruction_read_address=0;
         for (i=0;i<`Cache_size;i=i+1)
         begin
-            cache_address[i]<=0;
-            cache_instruction[i]<=0;
+            cache_address[i]=0;
+            cache_instruction[i]=0;
         end
     end
     else if (instruction_read_flag==0)
     begin
-        _instruction_read_flag<=0;
-        _instruction_read_address<=0;
+        _instruction_read_flag=0;
+        _instruction_read_address=0;
     end
 //    else if (cache_address[instruction_read_address[9:2]]==instruction_read_address)
 //    begin
 //        _instruction_read_flag<=0;
 //        _instruction_read_address<=0;
 //    end
-    else
+    else if (instruction_flag==0)
     begin
 $display("Icache in %d",_instruction_read_address); 
-        _instruction_read_flag<=1;
-        _instruction_read_address<=instruction_read_address;
+        _instruction_read_flag=1;
+        _instruction_read_address=instruction_read_address;
     end
 end
 always @ (*)
