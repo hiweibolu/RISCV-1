@@ -67,8 +67,8 @@ begin
     read2_address=0;
     alusel=0;
     aluop=0;
-    op1=0;
-    op2=0;
+    data1=0;
+    data2=0;
     write_flag=0;
     sl_address=0;
     sl_offset=0;
@@ -336,7 +336,7 @@ begin
             end
         endcase 
     end 
-$display("ID    %x %x %d %d",_pc,instruction,alusel,aluop); 
+//$display("ID    %x %x %d %d",_pc,instruction,alusel,aluop); 
 end
 
 always @ (*)
