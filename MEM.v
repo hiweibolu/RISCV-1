@@ -67,7 +67,7 @@ begin
 end
 always @ (*)
 begin
-    if (rst==0)
+    if (rst==1)
     begin
         _modify_data=0;
     end
