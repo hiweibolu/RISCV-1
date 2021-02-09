@@ -31,7 +31,7 @@ begin
         _pc<=pc;
         _instruction<=instruction;
         _prediction<=prediction;
-//$display("IF_ID    %d %d %d %d",pc,_pc,instruction,prediction); 
+//$display("IF_ID    %x %x %d",_pc,_instruction,prediction); 
     end
 end
 endmodule

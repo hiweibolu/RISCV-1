@@ -48,7 +48,7 @@ always @ (posedge clk)
 begin
     if (rst!=1)
     begin
-        $display("Mem_ctrl %d %d %d %d %d %d",running_state,state,num,tmp_num,instruction_read_flag,tmp_address);
+//        $display("Mem_ctrl %d %d %d %d %d %d",running_state,state,num,tmp_num,instruction_read_flag,tmp_address);
     end
     if (rst==1)
     begin
@@ -138,7 +138,7 @@ begin
         begin
             tmp_data[31:24]<=mem_din;
         end
-        tmp_num=tmp_num+1;
+        tmp_num<=tmp_num+1;
         if (tmp_num==num+2)
         begin
             running_state<=0;
@@ -194,7 +194,7 @@ begin
         begin
             tmp_data[31:24]<=mem_din;
         end
-        tmp_num=tmp_num+1;
+        tmp_num<=tmp_num+1;
         if (tmp_num==num+2)
         begin
             running_state<=0;

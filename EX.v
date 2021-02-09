@@ -109,6 +109,7 @@ begin
         begin
             modify_data=pc+4;
             _br_address=br_address+br_offset;
+//$display("EX %x %d %d %x",pc,alusel,aluop,_br_address);
             br_update=1;
             case (aluop)
                 `EX_branch_BEQ: br=op1==op2;

@@ -113,6 +113,7 @@ wire MEM_sl_data_signed;
 wire Memctrl_mem_ctrl_done;
 wire[`Data_size] Memctrl_mem_ctrl_data;
 wire MEM_stall_flag;
+wire Memctrl_running;
 wire Memctrl_instruction_flag;
 wire[`Instruction_size] Memctrl_instruction;
 wire icache_instruction_read_flag;
@@ -367,12 +368,15 @@ i_cache _i_cache
   .clk(clk_in),
   .rst(Rst),
 
+  .discard(EX_br_error),
+
   .instruction_read_flag(IF_instruction_read_flag),
   .instruction_read_address(IF_instruction_read),
 
   ._instruction_flag(icache_instruction_flag),
   ._instruction(icache_instruction),
 
+  .running(Memctrl_running),
   .instruction_flag(Memctrl_instruction_flag),
   .instruction(Memctrl_instruction),
 
@@ -388,6 +392,7 @@ Mem_ctrl _Mem_ctrl
   .instruction_read_flag(icache_instruction_read_flag),
   .instruction_read_address(icache_instruction_read_address),
 
+  .running(Memctrl_running),
   .instruction_flag(Memctrl_instruction_flag),
   .instruction(Memctrl_instruction),
 

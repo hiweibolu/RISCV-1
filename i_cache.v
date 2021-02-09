@@ -4,6 +4,9 @@ module i_cache
     input wire clk,
     input wire rst,
 
+    input wire discard,
+    //wire from EX
+
     input wire instruction_read_flag,
     input wire[`Instruction_Address_size] instruction_read_address,
     //wire from IF
@@ -44,9 +47,9 @@ begin
 //        _instruction_read_flag<=0;
 //        _instruction_read_address<=0;
 //    end
-    else if (instruction_flag==0)
+    else if (running==0&&discard==0)
     begin
-$display("Icache in %d",_instruction_read_address); 
+//$display("Icache in %d",_instruction_read_address); 
         _instruction_read_flag=1;
         _instruction_read_address=instruction_read_address;
     end
@@ -70,6 +73,11 @@ begin
 //$display("Icache out %d  %d",instruction_read_address,_instruction); 
 //        cache_address[instruction_read_address[9:2]]<=instruction_read_address;
 //        cache_instruction[instruction_read_address[9:2]]<=instruction;
+    end
+    else
+    begin
+        _instruction_flag=0;
+        _instruction=0;
     end
 end
 endmodule

@@ -24,7 +24,7 @@ begin
         if (stall_state[0]==0)
         begin
             _pc<=pc;
-$display("Pc_reg %d",_pc);
+//$display("Pc_reg %d",_pc);
         end
     end
     else

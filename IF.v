@@ -31,6 +31,7 @@ begin
         _pc=pc;
         instruction_read_flag=1;
         instruction_read=pc;
+//$display("IF %d %d",_pc,pc);
     end
 end
 
@@ -43,7 +44,7 @@ begin
     else if (instruction_flag==1)
     begin
         _instruction=instruction;
-//$display("IF  %d  %d",_pc,_instruction);  
+$display("IF  %x  %x",_pc,_instruction);  
     end
 end
 endmodule
