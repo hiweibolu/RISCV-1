@@ -123,7 +123,7 @@ begin
                 begin
                     br=1;
                     modify_data=pc+4;
-                    _br_address=_br_address&-1;
+                    _br_address=_br_address&~1;
                 end
             endcase
             if (br==1)
