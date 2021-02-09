@@ -8,6 +8,7 @@ module Mem_ctrl
     input wire[`Instruction_Address_size] instruction_read_address,
     //input wire from i-cache
 
+    output wire running,
     output reg instruction_flag,
     output reg[`Instruction_size] instruction,
     //output wire to i-cache
@@ -42,6 +43,7 @@ reg[2:0] num;
 reg[2:0] tmp_num;
 reg[31:0] tmp_data;
 reg[`Data_Address_size] tmp_address;
+assign running=running_state;
 always @ (posedge clk)
 begin
     if (rst!=1)
@@ -238,6 +240,12 @@ begin
             mem_a=tmp_address+3;
             mem_wr=1;
         end
+        else
+        begin
+            mem_dout=0;
+            mem_a=0;
+            mem_wr=0;
+        end
     end
     else
     begin
@@ -260,6 +268,12 @@ begin
         else if (tmp_num==4)
         begin
             mem_a=tmp_address+3;
+            mem_wr=0;
+        end
+        else
+        begin
+            mem_dout=0;
+            mem_a=0;
             mem_wr=0;
         end
     end
