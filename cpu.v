@@ -32,10 +32,8 @@ module cpu(
 wire Rst=(rst_in==1)||(rdy_in==0);
 wire[`Stall_size] Stall_state;
 wire[`Instruction_Address_size] Pc_reg_pc;
-wire icache_instruction_flag;
-wire[`Instruction_size] icache_instruction;
 wire IF_instruction_read_flag;
-wire[`Instruction_Address_size] IF_instruction_read;
+wire[`Instruction_Address_size] IF_instruction_read_address;
 wire[`Instruction_Address_size] IF_pc;
 wire[`Instruction_size] IF_instruction;
 wire IF_stall_flag;
@@ -115,9 +113,8 @@ wire[`Data_size] Memctrl_mem_ctrl_data;
 wire MEM_stall_flag;
 wire Memctrl_running;
 wire Memctrl_instruction_flag;
+wire[`Instruction_Address_size] Memctrl_instruction_read_address;
 wire[`Instruction_size] Memctrl_instruction;
-wire icache_instruction_read_flag;
-wire[`Instruction_Address_size] icache_instruction_read_address;
 wire[`Instruction_Address_size] predictor_pc;
 wire[`Instruction_Address_size] EX_br_pc;
 
@@ -139,20 +136,22 @@ pc_reg _pc_reg
 
 IF _IF
 (
+  .clk(clk_in),
   .rst(Rst),
 
   .pc(Pc_reg_pc),
 
-  .instruction_flag(icache_instruction_flag),
-  .instruction(icache_instruction),
-  
-  .instruction_read_flag(IF_instruction_read_flag),
-  .instruction_read(IF_instruction_read),
-  
   ._pc(IF_pc),
   ._instruction(IF_instruction),
 
-  .stall_flag(IF_stall_flag)
+  .stall_flag(IF_stall_flag),
+
+  .instruction_flag(Memctrl_instruction_flag),
+  .instruction_read_address(Memctrl_instruction_read_address),
+  .instruction(Memctrl_instruction),
+  
+  ._instruction_read_flag(IF_instruction_read_flag),
+  ._instruction_read_address(IF_instruction_read_address)
 );
 
 IF_ID _IF_ID
@@ -363,37 +362,16 @@ MEM _MEM
   .stall_flag(MEM_stall_flag)
 );
 
-i_cache _i_cache
-(
-  .clk(clk_in),
-  .rst(Rst),
-
-  .discard(EX_br_error),
-
-  .instruction_read_flag(IF_instruction_read_flag),
-  .instruction_read_address(IF_instruction_read),
-
-  ._instruction_flag(icache_instruction_flag),
-  ._instruction(icache_instruction),
-
-  .running(Memctrl_running),
-  .instruction_flag(Memctrl_instruction_flag),
-  .instruction(Memctrl_instruction),
-
-  ._instruction_read_flag(icache_instruction_read_flag),
-  ._instruction_read_address(icache_instruction_read_address)
-);
-
 Mem_ctrl _Mem_ctrl
 (
   .clk(clk_in),
   .rst(Rst),
 
-  .instruction_read_flag(icache_instruction_read_flag),
-  .instruction_read_address(icache_instruction_read_address),
+  .instruction_read_flag(IF_instruction_read_flag),
+  .instruction_read_address(IF_instruction_read_address),
 
-  .running(Memctrl_running),
   .instruction_flag(Memctrl_instruction_flag),
+  ._instruction_read_address(Memctrl_instruction_read_address),
   .instruction(Memctrl_instruction),
 
   .load(MEM_load),

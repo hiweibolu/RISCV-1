@@ -6,12 +6,12 @@ module Mem_ctrl
 
     input wire instruction_read_flag,
     input wire[`Instruction_Address_size] instruction_read_address,
-    //input wire from i-cache
+    //input wire from IF
 
-    output wire running,
     output reg instruction_flag,
+    output reg[`Instruction_Address_size] _instruction_read_address,
     output reg[`Instruction_size] instruction,
-    //output wire to i-cache
+    //output wire to IF
 
     input wire load,
     input wire save,
@@ -200,6 +200,7 @@ begin
             running_state<=0;
             state<=0;
             instruction_flag<=1;
+            _instruction_read_address<=tmp_address;
             instruction<=tmp_data;
 //$display("instruction from RAM   %d %d %d",instruction_read_address,instruction,tmp_data);
         end
