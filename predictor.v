@@ -20,6 +20,13 @@ reg[`Instruction_Address_size] address[`Predictor_size-1:0];
 reg[`Instruction_size] instruction[`Predictor_size-1:0];
 reg jump[`Predictor_size-1:0];
 integer i;
+initial begin
+    for (i=0;i<`Predictor_size;i=i+1)
+    begin
+        address[i][31]=1;
+        instruction[i]=0;
+    end
+end
 always @ (posedge clk)
 begin
     if (rst==1)
