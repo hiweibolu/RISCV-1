@@ -68,7 +68,7 @@ begin
         instruction<=0;
         mem_ctrl_done<=0;
         mem_ctrl_data<=0;
-        if (save==1&&mem_ctrl_done==0)
+        if (save==1 && mem_ctrl_done==0)
         begin
             running_state<=1;
             state<=2'b01;
@@ -76,7 +76,7 @@ begin
             tmp_address<=sl_reg_address;
             tmp_num<=1;
         end
-        else if (load==1&&mem_ctrl_done==0)
+        else if (load==1 && mem_ctrl_done==0)
         begin
             running_state<=1;
             state<=2'b10;
@@ -102,14 +102,29 @@ begin
                 if (tmp_num==1)
                 begin
                     tmp_num<=2;
+                            /*mem_dout<=sl_data[15:8];
+                            mem_a<=tmp_address+1;
+                            mem_wr<=1;*/
                 end
                 else if (tmp_num==2)
                 begin
                     tmp_num<=3;
+                            /*mem_dout<=sl_data[23:16];
+                            mem_a<=tmp_address+2;
+                            mem_wr<=1;*/
                 end
-                else
+                else if (tmp_num==3)
                 begin
                     tmp_num<=4;
+                           /* mem_dout<=sl_data[31:24];
+                            mem_a<=tmp_address+3;
+                            mem_wr<=1;*/
+                end
+                else 
+                begin
+                                running_state<=0;
+                                state<=0;
+                                mem_ctrl_done<=1;
                 end
             end
             else

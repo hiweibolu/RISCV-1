@@ -56,6 +56,8 @@ wire EX_save;
 wire[`Data_Address_size] EX_sl_reg_address;
 wire[`Data_size] EX_sl_data;
 wire Mem_write_flag;
+wire[`Data_Address_size] Mem_modify_address;
+wire[`Data_size] Mem_modify_data;
 wire ID_stall_flag;
 wire[`Instruction_Address_size] ID_pc;
 wire ID_prediction;
@@ -115,6 +117,7 @@ wire[`Instruction_Address_size] Memctrl_instruction_read_address;
 wire[`Instruction_size] Memctrl_instruction;
 wire[`Instruction_Address_size] predictor_pc;
 wire[`Instruction_Address_size] EX_br_pc;
+
 
 pc_reg _pc_reg
 (

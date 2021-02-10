@@ -65,6 +65,17 @@ begin
     sl_data=0;
     sl_data_length=0;
     sl_data_signed=0;
+    
+   	
+    if (pc == 32'h000011e8) 
+    begin
+//       $display("hello");
+    end
+     if (pc == 32'h00001188) 
+       begin
+ //         $display("hello");
+       end
+    
     if (rst==0)
     begin
         modify_flag=write_flag;
@@ -123,9 +134,9 @@ begin
                 begin
                     br=1;
                     modify_data=pc+4;
-                    _br_address=_br_address&~1;
+                    _br_address = {_br_address[31 : 1], 1'b0};
+                    br_update = 0;
                     br_error=1;
-                    br_update=0;
                 end
             endcase
             if (br==1)

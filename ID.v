@@ -74,6 +74,14 @@ begin
     sl_offset=0;
     br_address=0;
     br_offset=0;
+    if (pc == 32'h000011e8) 
+        begin
+    //       $display("hello");
+        end
+     if (pc == 32'h00001188) 
+       begin
+    //      $display("hello");
+       end
     if (rst==0)
     begin
         case (opcode)

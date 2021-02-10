@@ -31,7 +31,7 @@ begin
         _modify_flag<=modify_flag;
         _modify_address<=modify_address;
         _modify_data<=modify_data;
-//if (modify_flag==1) $display("WB %d %x %x",modify_flag,modify_address,modify_data);
+//$display("WB %d %x %x",modify_flag,modify_address,modify_data);
     end
 end
 endmodule

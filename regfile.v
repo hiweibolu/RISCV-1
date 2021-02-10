@@ -25,7 +25,7 @@ begin
     begin
         for (i=0;i<32;i=i+1) regs[i]<=0;
     end
-    else if (wb_flag==1)
+    else if (wb_flag==1 && wb_address!=0)
     begin
         regs[wb_address]<=wb_data;
     end
@@ -36,7 +36,7 @@ begin
     begin
         read1_data=0;
     end
-    else if (read1_address==wb_address)
+    else if (read1_address==wb_address && wb_flag==1)
     begin
         read1_data=wb_data;
     end
@@ -51,7 +51,7 @@ begin
     begin
         read2_data=0;
     end
-    else if (read2_address==wb_address)
+    else if (read2_address==wb_address && wb_flag==1)
     begin
         read2_data=wb_data;
     end
