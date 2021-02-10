@@ -207,14 +207,14 @@ ID _ID
   .read1_data(Regfile_read1_data),
   .read2_data(Regfile_read2_data),
 
-  .ex_load_flag(EX_MEM_load),
-  .ex_write_flag(EX_MEM_modify_flag),
-  .ex_modify_address(EX_MEM_modify_address),
-  .ex_modify_data(EX_MEM_modify_data),
+  .ex_load_flag(EX_load),
+  .ex_write_flag(EX_modify_flag),
+  .ex_modify_address(EX_modify_address),
+  .ex_modify_data(EX_modify_data),
 
-  .mem_write_flag(MEM_WB_modify_flag),
-  .mem_modify_address(MEM_WB_modify_address),
-  .mem_modify_data(MEM_WB_modify_data),
+  .mem_write_flag(MEM_modify_flag),
+  .mem_modify_address(MEM_modify_address),
+  .mem_modify_data(MEM_modify_data),
 
   .stall_flag(ID_stall_flag),
 
