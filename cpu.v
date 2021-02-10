@@ -115,9 +115,6 @@ wire[`Instruction_Address_size] Memctrl_instruction_read_address;
 wire[`Instruction_size] Memctrl_instruction;
 wire[`Instruction_Address_size] predictor_pc;
 wire[`Instruction_Address_size] EX_br_pc;
-wire ID_br_JALR;
-wire ID_EX_br_JALR;
-wire EX_br_JALR;
 
 pc_reg _pc_reg
 (
@@ -228,8 +225,7 @@ ID _ID
   .sl_address(ID_sl_address),
   .sl_offset(ID_sl_offset),
   .br_address(ID_br_address),
-  .br_offset(ID_br_offset),
-  .br_JALR(ID_br_JALR)
+  .br_offset(ID_br_offset)
 );
 
 ID_EX _ID_EX
@@ -247,7 +243,6 @@ ID_EX _ID_EX
   .sl_offset(ID_sl_offset),
   .br_address(ID_br_address),
   .br_offset(ID_br_offset),
-  .br_JALR(ID_br_JALR),
   .prediction(ID_prediction),
 
   .stall_state(Stall_state),
@@ -264,7 +259,6 @@ ID_EX _ID_EX
   ._sl_offset(ID_EX_sl_offset),
   ._br_address(ID_EX_br_address),
   ._br_offset(ID_EX_br_offset),
-  ._br_JALR(ID_EX_br_JALR),
   ._prediction(ID_EX_prediction)
 );
 
@@ -282,7 +276,6 @@ EX _EX
   .sl_offset(ID_EX_sl_offset),
   .br_address(ID_EX_br_address),
   .br_offset(ID_EX_br_offset),
-  .br_JALR(ID_EX_br_JALR),
   .prediction(ID_EX_prediction),
 
   .modify_flag(EX_modify_flag),
@@ -290,7 +283,6 @@ EX _EX
   .modify_data(EX_modify_data),
 
   .br_update(EX_br_update),
-  ._br_JALR(EX_br_JALR),
   .br(EX_br),
 
   ._br_address(EX_br_address),
@@ -436,7 +428,6 @@ predictor _predictor
 
   .br_update(EX_br_update),
   .br(EX_br),
-  .br_JALR(EX_br_JALR),
   .br_address(EX_br_address),
   .br_pc(EX_br_pc)
 );

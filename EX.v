@@ -13,7 +13,6 @@ module EX
     input wire[`Data_Address_size] sl_offset, //for save & load
     input wire[`Instruction_Address_size] br_address, //for branch
     input wire[`Instruction_Address_size] br_offset, //for branch
-    input wire br_JALR, //if instruction is JALR
     input wire prediction,
     //wire from ID_EX
     output reg modify_flag,
@@ -23,7 +22,6 @@ module EX
     //wire to EX_MEM
 
     output reg br_update, // if instruction is branch
-    output wire _br_JALR, // if instruction is JALR
     output reg br, // if branch
     output reg[`Instruction_Address_size] _br_address, // address if branch
     output wire[`Instruction_Address_size] _br_pc, //address of the branch instruction
@@ -52,7 +50,6 @@ module EX
     // reg[modify_address]=mem[sl_reg_address]
 );
 assign _br_pc=pc;
-assign _br_JALR=br_JALR;
 always @ (*)
 begin
     modify_flag=0;
@@ -127,6 +124,8 @@ begin
                     br=1;
                     modify_data=pc+4;
                     _br_address=_br_address&~1;
+                    br_error=1;
+                    br_update=0;
                 end
             endcase
             if (br==1)

@@ -36,8 +36,7 @@ module ID
     output reg[`Data_Address_size] sl_address, //for save & load
     output reg[`Data_Address_size] sl_offset, //for save & load
     output reg[`Instruction_Address_size] br_address, //for branch
-    output reg[`Instruction_Address_size] br_offset, //for branch
-    output reg br_JALR //if instruction is JALR
+    output reg[`Instruction_Address_size] br_offset //for branch
     //wire to ID_EX
 );
 wire[6:0] opcode=instruction[6:0];
@@ -75,7 +74,6 @@ begin
     sl_offset=0;
     br_address=0;
     br_offset=0;
-    br_JALR=0;
     if (rst==0)
     begin
         case (opcode)
@@ -116,7 +114,6 @@ begin
                 sl_address=rd;
                 br_address=op1;
                 br_offset=I_imm;
-                br_JALR=1;
             end // JALR
             7'b1100011:
             begin
