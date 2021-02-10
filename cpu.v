@@ -56,8 +56,6 @@ wire EX_save;
 wire[`Data_Address_size] EX_sl_reg_address;
 wire[`Data_size] EX_sl_data;
 wire Mem_write_flag;
-wire[`Data_Address_size] Mem_modify_address;
-wire[`Data_size] Mem_modify_data;
 wire ID_stall_flag;
 wire[`Instruction_Address_size] ID_pc;
 wire ID_prediction;
@@ -209,14 +207,14 @@ ID _ID
   .read1_data(Regfile_read1_data),
   .read2_data(Regfile_read2_data),
 
-  .ex_load_flag(EX_load),
-  .ex_write_flag(EX_save),
-  .ex_modify_address(EX_sl_reg_address),
-  .ex_modify_data(EX_sl_data),
+  .ex_load_flag(EX_MEM_load),
+  .ex_write_flag(EX_MEM_modify_flag),
+  .ex_modify_address(EX_MEM_modify_address),
+  .ex_modify_data(EX_MEM_modify_data),
 
-  .mem_write_flag(Mem_modify_flag),
-  .mem_modify_address(Mem_modify_address),
-  .mem_modify_data(Mem_modify_data),
+  .mem_write_flag(MEM_WB_modify_flag),
+  .mem_modify_address(MEM_WB_modify_address),
+  .mem_modify_data(MEM_WB_modify_data),
 
   .stall_flag(ID_stall_flag),
 
